@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>event handler</title>
+    <meta charset="utf-8" />
+    <style>
+      body {
+        font-family: -apple-system, sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app1"></div>
+    <div id="app2"></div>
+    <script src="react/react.js"></script>
+    <script src="react/react-dom.js"></script>
+    <script src="react/babel.js"></script>
+    <script type="text/babel"></script>
+  </body>
+  <script type="text/babel">
+    function Button() {
+      function handleClick() {
+        alert("You clicked me!");
+      }
+
+      return <button onClick={handleClick}>Click me</button>;
+    }
+
+    function Button2({ onClick, children }) {
+      return <button onClick={onClick}>{children}</button>;
+    }
+
+    function PlayButton({ movieName }) {
+      function handlePlayClick() {
+        alert(`Playing ${movieName}!`);
+      }
+
+      return <Button2 onClick={handlePlayClick}>Play "{movieName}"</Button2>;
+    }
+
+    ReactDOM.render(<Button />, document.getElementById("app1"));
+    ReactDOM.render(<PlayButton movieName="The Matrix" />, document.getElementById("app2"));
+  </script>
+</html>

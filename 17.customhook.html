@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>custom hook</title>
+    <meta charset="utf-8" />
+    <style>
+      body {
+        font-family: -apple-system, sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script src="react/react.js"></script>
+    <script src="react/react-dom.js"></script>
+    <script src="react/babel.js"></script>
+    <script type="text/babel">
+      const { useState, useEffect } = React;
+
+      function useWindowSize() {
+        const [windowSize, setWindowSize] = useState({
+          width: window.innerWidth,
+          height: window.innerHeight,
+        });
+
+        useEffect(() => {
+          // Handler to call on window resize
+          function handleResize() {
+            // Set window width/height to state
+            setWindowSize({
+              width: window.innerWidth,
+              height: window.innerHeight,
+            });
+          }
+          // Add event listener
+          window.addEventListener("resize", handleResize);
+          // Call handler right away so state gets updated with initial window size
+          handleResize();
+          // Remove event listener on cleanup
+          return () => window.removeEventListener("resize", handleResize);
+        }, []); // Empty array ensures that effect is only run on mount
+        return windowSize;
+      }
+
+      function Test() {
+        const { width, height } = useWindowSize();
+        useEffect(() => {
+          console.log(width, height);
+        }, [width, height]);
+
+        return <div>Test custom hook</div>;
+      }
+
+      ReactDOM.render(<Test />, document.getElementById("app"));
+    </script>
+  </body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Custom React Component</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="00.normal.css" />
+  </head>
+  <body>
+    <div id="app">
+      <!-- my app renders here -->
+    </div>
+    <script src="react/react.js"></script>
+    <script src="react/react-dom.js"></script>
+    <script src="react/babel.js"></script>
+    <script type="text/babel">
+      const Avatar = function () {
+        return (
+          <img className="avatar" src="https://i.imgur.com/7vQD0fPs.jpg" alt="Gregorio Y. Zara" />
+        );
+      };
+
+      const Avatar2 = () => {
+        const avatar = "https://i.imgur.com/7vQD0fPs.jpg";
+        const description = "Gregorio Y. Zara";
+        return <img className="avatar" src={avatar} alt={description} />;
+      };
+
+      ReactDOM.render(<Avatar />, document.getElementById("app"));
+    </script>
+  </body>
+</html>

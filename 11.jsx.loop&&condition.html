@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>JSX loop and condition rendering</title>
+    <meta charset="utf-8" />
+  </head>
+  <body>
+    <div id="app1"></div>
+    <div id="app2"></div>
+    <script src="react/react.js"></script>
+    <script src="react/react-dom.js"></script>
+    <script src="react/babel.js"></script>
+    <script type="text/babel">
+      // condition reandering
+      function Item({ name, isPacked }) {
+        if (isPacked) {
+          return <li className="item">{name} ✔</li>;
+        }
+        return <li className="item">{name}</li>;
+      }
+
+      function PackingList() {
+        return (
+          <section>
+            <h1>Sally Ride's Packing List</h1>
+            <ul>
+              <Item isPacked={true} name="Space suit" />
+              <Item isPacked={true} name="Helmet with a golden leaf" />
+              <Item isPacked={false} name="Photo of Tam" />
+            </ul>
+          </section>
+        );
+      }
+
+      ReactDOM.render(<PackingList />, document.getElementById("app1"));
+
+      // loop
+
+      const people = [
+        "Creola Katherine Johnson: mathematician",
+        "Mario José Molina-Pasquel Henríquez: chemist",
+        "Mohammad Abdus Salam: physicist",
+        "Percy Lavon Julian: chemist",
+        "Subrahmanyan Chandrasekhar: astrophysicist",
+      ];
+
+      function List() {
+        const listItems = people.map((person) => <li>{person}</li>);
+        return <ul>{listItems}</ul>;
+      }
+
+      ReactDOM.render(<List />, document.getElementById("app2"));
+    </script>
+  </body>
+</html>
