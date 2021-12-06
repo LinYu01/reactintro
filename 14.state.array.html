@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>state</title>
+    <meta charset="utf-8" />
+    <style>
+      body {
+        font-family: -apple-system, sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script src="react/react.js"></script>
+    <script src="react/react-dom.js"></script>
+    <script src="react/babel.js"></script>
+    <script type="text/babel"></script>
+  </body>
+  <script type="text/babel">
+    const { useState } = React;
+
+    let nextId = 0;
+
+    function List() {
+      const [name, setName] = useState("");
+      const [artists, setArtists] = useState([]);
+
+      return (
+        <div>
+          <h1>Inspiring sculptors:</h1>
+          <input value={name} onChange={(e) => setName(e.target.value)} />
+          <button
+            onClick={() => {
+              setName("");
+              setArtists([...artists, { id: nextId++, name: name }]);
+              // artists.push({
+              //   id: nextId++,
+              //   name: name,
+              // });
+            }}
+          >
+            Add
+          </button>
+          <ul>
+            {artists.map((artist) => (
+              <li key={artist.id}>{artist.name}</li>
+            ))}
+          </ul>
+        </div>
+      );
+    }
+
+    ReactDOM.render(<List />, document.getElementById("app"));
+  </script>
+</html>

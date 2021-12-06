@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>state</title>
+    <meta charset="utf-8" />
+    <style>
+      body {
+        font-family: -apple-system, sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script src="react/react.js"></script>
+    <script src="react/react-dom.js"></script>
+    <script src="react/babel.js"></script>
+    <script type="text/babel"></script>
+  </body>
+  <script type="text/babel">
+    // import { useState } from "react";
+    const { useState } = React;
+
+    function MovingDot() {
+      // const [x, setX] = useState(0);
+      // const [y, setY] = useState(0);
+
+      const [position, setPosition] = useState({
+        x: 0,
+        y: 0,
+      });
+      return (
+        <div
+          onPointerMove={(e) => {
+            setPosition({
+              x: e.clientX,
+              y: e.clientY,
+            });
+          }}
+          style={{
+            position: "relative",
+            width: "100vw",
+            height: "100vh",
+          }}
+        >
+          <div
+            style={{
+              position: "absolute",
+              backgroundColor: "red",
+              borderRadius: "50%",
+              transform: `translate(${position.x}px, ${position.y}px)`,
+              left: -10,
+              top: -10,
+              width: 20,
+              height: 20,
+            }}
+          />
+        </div>
+      );
+    }
+
+    ReactDOM.render(<MovingDot />, document.getElementById("app"));
+  </script>
+</html>
